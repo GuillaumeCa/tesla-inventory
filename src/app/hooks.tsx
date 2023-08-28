@@ -25,7 +25,7 @@ export function useUpdateSearchParams() {
     if (value === "") {
       newParams.delete(key);
     }
-    router.push("?" + newParams.toString(), {
+    router.replace("?" + newParams.toString(), {
       scroll,
     });
   }

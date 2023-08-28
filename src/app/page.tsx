@@ -1,3 +1,4 @@
+import { RedirectType } from "next/dist/client/components/redirect";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -32,18 +33,18 @@ const defaults = {
   code: "78220",
 };
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams: Record<string, string>;
 }) {
-  const newParams = new URLSearchParams(searchParams);
+  if (Object.keys(defaults).some((d) => !searchParams[d])) {
+    const newParams = new URLSearchParams(searchParams);
 
-  if (Object.keys(defaults).some((d) => !newParams.has(d))) {
     Object.entries(defaults).forEach(([key, value]) => {
       newParams.set(key, value);
     });
-    redirect("?" + newParams.toString());
+    redirect("?" + newParams.toString(), RedirectType.replace);
   }
 
   return (
@@ -56,13 +57,13 @@ export default async function Home({
 
       <Suspense fallback={<InventoryListLoader />}>
         <InventoryList
-          carSelected={newParams.has("selected")}
+          carSelected={"selected" in searchParams}
           query={{
             ...query,
             query: {
               ...query.query,
-              model: newParams.get("model"),
-              zip: newParams.get("code"),
+              model: searchParams["model"],
+              zip: searchParams["code"],
             },
           }}
         />
