@@ -20,12 +20,14 @@ export function useUpdateSearchParams() {
   const router = useRouter();
   const newParams = new URLSearchParams(params);
 
-  function updateParam(key: string, value: string) {
+  function updateParam(key: string, value: string, scroll = true) {
     newParams.set(key, value);
     if (value === "") {
       newParams.delete(key);
     }
-    router.push("?" + newParams.toString());
+    router.push("?" + newParams.toString(), {
+      scroll,
+    });
   }
 
   function isParam(key: string, value: string) {

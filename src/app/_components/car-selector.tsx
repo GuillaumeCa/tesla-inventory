@@ -1,17 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useUpdateSearchParams } from "../hooks";
 
 export function CarSelector({ id }: { id: string }) {
-  const queryParams = useSearchParams();
-  const selected = queryParams.get("selected") === id;
-
-  function getSearchParam(idSelected: string) {
-    const newSearch = new URLSearchParams(queryParams);
-    newSearch.set("selected", idSelected);
-    return newSearch.toString();
-  }
+  const { updateParam, isParam } = useUpdateSearchParams();
+  const selected = isParam("selected", id);
 
   return (
     <div
@@ -19,15 +12,23 @@ export function CarSelector({ id }: { id: string }) {
         selected ? "" : "hidden group-hover:block"
       }`}
     >
-      <Link
-        href={"?" + getSearchParam(id)}
-        scroll={false}
-        className={`w-full text-center block mt-2 px-3 py-2 font-semibold ${
-          selected ? "bg-blue-600 text-white" : "text-gray-700 bg-gray-200"
-        } hover:bg-blue-600 hover:text-white rounded`}
+      <button
+        className={`w-full group/link text-center block mt-2 px-3 py-2 font-semibold ${
+          selected
+            ? "bg-blue-600 hover:bg-blue-700 text-white"
+            : "text-gray-200 hover:bg-blue-600 bg-gray-500"
+        } hover:text-white rounded`}
+        onClick={() => {
+          updateParam("selected", selected ? "" : id, false);
+        }}
       >
-        {selected ? "Selectionné" : "Selectionner"}
-      </Link>
+        <span className="group-hover/link:hidden">
+          {selected ? "Selectionné" : "Selectionner"}
+        </span>
+        <span className="hidden group-hover/link:inline">
+          {selected ? "Déselectionner" : "Selectionner"}
+        </span>
+      </button>
     </div>
   );
 }

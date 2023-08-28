@@ -2,7 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Filters } from "./_components/filters";
-import { InventoryList } from "./_components/inventory-list";
+import {
+  InventoryList,
+  InventoryListLoader,
+} from "./_components/inventory-list";
 
 const query = {
   query: {
@@ -14,8 +17,6 @@ const query = {
     market: "FR",
     language: "fr",
     super_region: "north america",
-    // lng: 2.1691875,
-    // lat: 48.80178249999999,
     zip: "78220",
     range: 50,
     region: "FR",
@@ -53,8 +54,9 @@ export default async function Home({
 
       <Filters />
 
-      <Suspense fallback={<p>Chargement...</p>}>
+      <Suspense fallback={<InventoryListLoader />}>
         <InventoryList
+          carSelected={newParams.has("selected")}
           query={{
             ...query,
             query: {

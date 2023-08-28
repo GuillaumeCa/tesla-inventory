@@ -9,15 +9,18 @@ export const Paint = {
 };
 export const Model = {
   my: "Model Y",
+  mx: "Model X",
   m3: "Model 3",
   ms: "Model S",
 };
 
 export const Trim = {
   MYRWD: "Propulsion",
-  LRAWD: "Long Range",
-  MSAWD: "Long Range",
+  LRAWD: "Grande Autonomie",
+  MSAWD: "Grande Autonomie",
   MSPLAID: "Plaid",
+  MXAWD: "Grande Autonomie",
+  MXPLAID: "Plaid",
 };
 
 export interface InventoryEntry {
@@ -37,7 +40,9 @@ export interface InventoryEntry {
   Hash: string;
   TRIM: (keyof typeof Trim)[];
   OptionCodeList: string;
+  OptionCodeSpecs: Record<string, OptionCodeSpecsValue>;
   VIN: string;
+  Year: number;
 }
 
 export interface OptionCodeDataItem {
@@ -57,4 +62,17 @@ export interface OptionCodeDataItem {
   description?: string;
   long_name?: string;
   name?: string;
+}
+
+export interface OptionCodeSpecsValue {
+  code: string;
+  name: string;
+  options: OptionCodeSpecsValueOption[];
+}
+
+export interface OptionCodeSpecsValueOption {
+  code: string;
+  name: string;
+  long_name: string;
+  description: string;
 }
