@@ -57,7 +57,7 @@ export default function Home({
 
       <Suspense fallback={<InventoryListLoader />}>
         <InventoryList
-          carSelected={"selected" in searchParams}
+          carSelectedId={searchParams["selected"]}
           query={{
             ...query,
             query: {

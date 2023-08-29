@@ -1,6 +1,9 @@
 export const FactoryCode = {
   GF00: "Fremont 🇺🇸",
+  GF01: "Giga Nevada 🇺🇸",
+  GF02: "Giga New York 🇺🇸",
   GF03: "Giga Shangai 🇨🇳",
+  GF04: "Giga Texas 🇺🇸",
   GF05: "Giga Berlin 🇩🇪",
 };
 

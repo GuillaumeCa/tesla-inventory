@@ -3,10 +3,9 @@ import { InventoryEntry } from "app/lib/types/inventory";
 import { useSearchParams } from "next/navigation";
 import { CarInfoPreview } from "./car-info-preview";
 
-export function SelectedCar({ inventory }: { inventory: InventoryEntry[] }) {
+export function SelectedCar({ entry }: { entry?: InventoryEntry }) {
   const queryParam = useSearchParams();
   const selected = queryParam.get("selected");
-  const entry = inventory.find((inv) => inv.Hash === selected);
   if (!selected || !entry) {
     return null;
   }

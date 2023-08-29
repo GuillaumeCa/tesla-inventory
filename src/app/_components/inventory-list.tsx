@@ -17,10 +17,10 @@ const hiddenOpts = [
 
 export async function InventoryList({
   query,
-  carSelected,
+  carSelectedId,
 }: {
   query: any;
-  carSelected: boolean;
+  carSelectedId: string;
 }) {
   const inventory = await searchInventory(query);
 
@@ -35,7 +35,7 @@ export async function InventoryList({
         <ul
           className={cls(
             "grid gap-4",
-            carSelected ? "grid-cols-2" : "grid-cols-3"
+            carSelectedId ? "grid-cols-2" : "grid-cols-3"
           )}
         >
           {inventory.map((entry) => (
@@ -57,7 +57,9 @@ export async function InventoryList({
         </ul>
       </div>
       <div>
-        <SelectedCar inventory={inventory} />
+        <SelectedCar
+          entry={inventory.find((inv) => carSelectedId === inv.Hash)}
+        />
       </div>
     </div>
   );
