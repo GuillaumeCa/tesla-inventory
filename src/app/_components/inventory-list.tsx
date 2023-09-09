@@ -25,7 +25,7 @@ export async function InventoryList({
   const inventory = await searchInventory(query);
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col-reverse lg:flex-row gap-4">
       <div className="flex-1">
         {inventory.length === 0 && (
           <p className="text-gray-500">
@@ -35,7 +35,9 @@ export async function InventoryList({
         <ul
           className={cls(
             "grid gap-4",
-            carSelectedId ? "grid-cols-2" : "grid-cols-3"
+            carSelectedId
+              ? "grid-cols-1 lg:grid-cols-2"
+              : "grid-cols-1 lg:grid-cols-3"
           )}
         >
           {inventory.map((entry) => (
@@ -56,11 +58,9 @@ export async function InventoryList({
           ))}
         </ul>
       </div>
-      <div>
-        <SelectedCar
-          entry={inventory.find((inv) => carSelectedId === inv.Hash)}
-        />
-      </div>
+      <SelectedCar
+        entry={inventory.find((inv) => carSelectedId === inv.Hash)}
+      />
     </div>
   );
 }

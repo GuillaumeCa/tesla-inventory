@@ -33,6 +33,8 @@ const defaults = {
   code: "78220",
 };
 
+export const revalidate = 3600;
+
 export default function Home({
   searchParams,
 }: {
@@ -48,7 +50,7 @@ export default function Home({
   }
 
   return (
-    <main className="min-h-screen p-12">
+    <main className="min-h-screen p-3 lg:p-12">
       <h1 className="text-3xl font-bold mb-4">
         <Link href="/">Inventaire Tesla</Link>
       </h1>

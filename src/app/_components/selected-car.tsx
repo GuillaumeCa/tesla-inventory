@@ -11,29 +11,34 @@ export function SelectedCar({ entry }: { entry?: InventoryEntry }) {
   }
 
   return (
-    <div className="w-[500px] sticky top-3 space-y-4 h-screen overflow-auto">
-      <div className="rounded-lg bg-gray-100 p-3 border-t-8 border-blue-600">
-        <CarInfoPreview entry={entry} />
-      </div>
-      <a
-        className="bg-gray-500 hover:bg-blue-600 block text-center text-white font-semibold px-3 py-3 rounded-lg"
-        target="_blank"
-        href={buildOpenUrl(entry)}
-      >
-        Voir sur tesla.com
-      </a>
-      <div className="rounded-lg bg-gray-100 p-3 space-y-2">
-        <CarInfo
-          label="Vehicule de Démo"
-          value={entry.IsDemo ? "Oui" : "Non"}
-        />
-        <CarInfo label="Année" value={entry.Year.toString()} />
-        <CarInfo label="En transit" value={entry.IsInTransit ? "Oui" : "Non"} />
-        <CarInfo
-          label="Connecteur de charge inclu"
-          value={entry.IsChargingConnectorIncluded ? "Oui" : "Non"}
-        />
-        <CarInfo label="VIN" value={entry.VIN.split("_")[0] + "*****"} />
+    <div>
+      <div className="w-full lg:w-[500px] pb-4 relative lg:sticky lg:top-3 space-y-4 lg:h-screen lg:overflow-auto">
+        <div className="rounded-lg bg-gray-100 p-3 border-t-8 border-blue-600">
+          <CarInfoPreview entry={entry} />
+        </div>
+        <a
+          className="bg-gray-500 hover:bg-blue-600 block text-center text-white font-semibold px-3 py-3 rounded-lg"
+          target="_blank"
+          href={buildOpenUrl(entry)}
+        >
+          Voir sur tesla.com
+        </a>
+        <div className="rounded-lg bg-gray-100 p-3 space-y-2">
+          <CarInfo
+            label="Vehicule de Démo"
+            value={entry.IsDemo ? "Oui" : "Non"}
+          />
+          <CarInfo label="Année" value={entry.Year.toString()} />
+          <CarInfo
+            label="En transit"
+            value={entry.IsInTransit ? "Oui" : "Non"}
+          />
+          <CarInfo
+            label="Connecteur de charge inclu"
+            value={entry.IsChargingConnectorIncluded ? "Oui" : "Non"}
+          />
+          <CarInfo label="VIN" value={entry.VIN.split("_")[0] + "*****"} />
+        </div>
       </div>
     </div>
   );
