@@ -18,7 +18,7 @@ const query = {
     market: "FR",
     language: "fr",
     super_region: "north america",
-    zip: "78220",
+    zip: "75000",
     range: 50,
     region: "FR",
   },
@@ -30,7 +30,7 @@ const query = {
 
 const defaults = {
   model: "my",
-  code: "78220",
+  code: "75000",
 };
 
 export const revalidate = 3600;
